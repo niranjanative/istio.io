@@ -310,9 +310,21 @@ spec:
 For some match conditions, you can also choose to select them using the exact
 value, a prefix, or a regex.
 
-You can add multiple match conditions to the same `match` block to AND your
-conditions, or add multiple match blocks to the same rule to OR your conditions.
-You can also have multiple routing rules for any given virtual service. This
+You can add multiple match conditions to the same `match` block, for example:
+
+{{< text yaml >}}
+- match:
+  - headers:
+      end-user:
+        exact: jason
+    uri:
+      prefix: /ratings
+  route:
+  - destination:
+      host: ratings
+{{< /text >}}
+
+You can also add multiple match blocks to the same rule OR to your conditions and you can have multiple routing rules for any given virtual service. This
 lets you make your routing conditions as complex or simple as you like within a
 single virtual service. A full list of match condition fields and their possible
 values can be found in the
